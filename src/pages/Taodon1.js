@@ -135,7 +135,7 @@ function Taodon1(prop) {
     const calculateShippingFee = () => {
         const {
           weightId,
-          regironsId,
+          regionsId,
           goodsId,
           proceeds,
           insuranceId
@@ -145,7 +145,7 @@ function Taodon1(prop) {
             setShippingFee(fee);
     
         const weightValue = weight.find((item) => item.id === formData.weightId).weightValue;
-        const regironsId = parseInt(regironsId, 10);
+        const regionsId = parseInt(regionsId, 10);
         const goodsName = good.find((item) => item.id === formData.goodsId).goodsName;
         const insuranceValue = insurance.find(item => item.id === parseInt(insuranceId, 10)).insuranceValue;
         
@@ -169,7 +169,7 @@ function Taodon1(prop) {
           
               if (regironsId === 1) { // Miền Bắc
                 fee += 30000;
-              } else if (regironsId === 2 || regironsId === 3) { // Miền Trung hoặc Miền Nam
+              } else if (regionsId === 2 || regionsId === 3) { // Miền Trung hoặc Miền Nam
                 fee += 40000;
               } else { // Nội tỉnh
                 fee += 25000;
