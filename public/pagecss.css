@@ -1,0 +1,132 @@
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #e8e8e8;
+    border-radius: 4px;
+  }
+  
+  .modern-table th,
+  .modern-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .modern-table th {
+    background-color: rgb(249, 191, 56);
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .modern-table tbody tr:nth-child(even) {
+    background-color: #cacaca;
+  }
+  
+  .modern-table tbody tr:hover {
+    background-color: #c8f896;
+  }
+  
+  .modern-table tbody td {
+    color: #282828;
+  }
+  
+  .modern-table tbody td:last-child {
+    border-right: none;
+  }
+  
+  .modern-table tbody td:first-child {
+    border-left: none;
+  }
+  
+  .modern-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .modern-list li a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .modern-list li a:before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .modern-list li a:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  #myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgb(255, 191, 0); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 30px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+  }
+  
+  #myBtn:hover {
+    background-color: #95d836; /* Add a dark-grey background on hover */
+  }
+
+
+  .container_about {
+    height: 300px;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .right-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+  }
+  
+  
+  
+  .left-column {
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+
+
+
+  #slideshow { 
+    margin: 50px auto; 
+    position: relative; 
+    width: 240px; 
+    height: 240px; 
+    padding: 10px; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.4); 
+  }
+  
+  #slideshow > div { 
+    position: absolute; 
+    top: 10px; 
+    left: 10px; 
+    right: 10px; 
+    bottom: 10px; 
+  }
