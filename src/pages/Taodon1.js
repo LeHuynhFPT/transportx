@@ -167,7 +167,7 @@ function Taodon1(prop) {
                 fee = 70000;
               }
           
-              if (regironsId === 1) { // Miền Bắc
+              if (regionsId === 1) { // Miền Bắc
                 fee += 30000;
               } else if (regionsId === 2 || regionsId === 3) { // Miền Trung hoặc Miền Nam
                 fee += 40000;
