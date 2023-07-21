@@ -11,7 +11,6 @@ import sendDataToAPI from "../services/order.service";
 import { useNavigate } from 'react-router-dom';
 
 function Taodon1(prop) {
-    
     const userData = JSON.parse(localStorage.getItem('state'));
     const [provinces,setProvince] = useState([]);
     const [districts, setDistrict] = useState([]);
@@ -20,9 +19,8 @@ function Taodon1(prop) {
     const [weight,setWeight] = useState([]);
     const [insurance,setInsurance] = useState([]);
     const [selectedGood, setSelectedGood] = useState('');
-    const [shippingFee, setShippingFee] = useState(0);
-    
     const history = useNavigate();
+    const [shippingFee, setShippingFee] = useState(0);
     const [formData, setFormData] = useState({
         senderName: "", 
         senderPhone: "",
@@ -41,14 +39,12 @@ function Taodon1(prop) {
         goodsId: 0,
         weightId: 0,
         insuranceId: 0,
-        
         userId: userData.userId
       });
     const findProvince = async ()=>{
       const provinces = await getProvince();
       setProvince(provinces);
     }
-    
     useEffect(()=>{
         findProvince();
     },[]);
@@ -136,50 +132,68 @@ function Taodon1(prop) {
         alert("Tạo đơn hàng thành công");
         history("/orderlist");
     }
-    const calculateShippingFee = (weight, provinceId, goods, insurance) => {
+    const calculateShippingFee = () => {
+        const {
+          weightId,
+          regironsId,
+          goodsId,
+          proceeds,
+          insuranceId
+        } = formData;
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            setShippingFee(fee);
+    
+        const weightValue = weight.find((item) => item.id === formData.weightId).weightValue;
+        const regironsId = parseInt(regironsId, 10);
+        const goodsName = good.find((item) => item.id === formData.goodsId).goodsName;
+        const insuranceValue = insurance.find(item => item.id === parseInt(insuranceId, 10)).insuranceValue;
+        
+    
         let fee = 0;
-        if (weight <= 5) {
-            fee = 10000;
-          } else if (weight <= 30) {
-            fee = 30000;
-          } else if (weight <= 100) {
-            fee = 50000;
-          } else {
-            fee = 70000;
-          }
-        const isFragile = goods === 'dễ vỡ';
-        const isFood = goods === 'thực phẩm';
-        if (provinceId === provinceId) {
-            fee = 25000;
-          } else if (provinceId === '1'|| provinceId === '2' || provinceId === '3') {
-            fee = 35000;
-          } else {
-            fee = 40000;
-          }
-        if (isFragile) {
-            fee += 5000;
-        }
-        if (isFood) {
-            fee += 7000;
-        }
-        if (insurance) {
-            const insuranceFee = (fee * 2) / 100; // Phí bảo hiểm là 2% giá trị phí gửi hàng
-            fee += insuranceFee;
-        }
-        const simulateOrderProcessing = (order) => {
-            // xử lý đơn hàng và thông tin trả về từ API
-            
-            const simulatedShippingFee = calculateShippingFee(
-              order.weight,
-              order.province,
-              order.goods,
-              order.insurance
-            );
-            setShippingFee(simulatedShippingFee);
-        };
-
+    
+        
+        const handleChange = (e, callback) => {
+            formData[e.target.name] = e.target.value;
+            setFormData(formData);
+        
+            if (weightValue <= 5) {
+                fee = 10000;
+              } else if (weightValue <= 30) {
+                fee = 30000;
+              } else if (weightValue <= 100) {
+                fee = 50000;
+              } else {
+                fee = 70000;
+              }
           
-    }
+              if (regironsId === 1) { // Miền Bắc
+                fee += 30000;
+              } else if (regironsId === 2 || regironsId === 3) { // Miền Trung hoặc Miền Nam
+                fee += 40000;
+              } else { // Nội tỉnh
+                fee += 25000;
+              }
+          
+              if (goodsName === "dễ vỡ") {
+                fee += 10000;
+              } else if (goodsName === "thực phẩm") {
+                fee += 5000;
+              }
+          
+              const insuranceFee = (proceeds * insuranceValue) / 100;
+              fee += insuranceFee;
+            const fee = calculateShippingFee();
+            setShippingFee(fee);
+        
+            if (typeof callback === 'function') {
+              callback(e);
+            }
+        }
+    
+        
+      };
+    
     return(
         <div className="container">
             <Sidebar/>
@@ -307,6 +321,7 @@ function Taodon1(prop) {
     </div>
     </div>
     );
+}
 }
 
 export default Taodon1;
